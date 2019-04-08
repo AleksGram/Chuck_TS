@@ -4,18 +4,18 @@ import Loader from '../loader'
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { compose } from 'redux';
-import  withStoreService  from '../hoc';
+import withStoreService from '../hoc';
 import './jokeCategories.css';
-import  JokeItem from '../jokeItem';
+import JokeItem from '../jokeItem';
 import ChuckService from '../../services/store-service';
-import {IState} from '../../store/index';
+import { IState } from '../../store/index';
 
 
 
 export interface IJokeCatProps {
     storeService: ChuckService,
-    jokeCategories: (categories:string[])=>{type:string, payload:string[]},
-    activeCategory?:string,
+    jokeCategories: (categories: string[]) => { type: string, payload: string[] },
+    activeCategory?: string,
 
 }
 
@@ -30,41 +30,50 @@ class JokeCategories extends React.Component<Props, IState> {
             .then((data) => jokeCategories(data))
     }
 
-    
+
     render() {
         // eslint-disable-next-line
         const { categories, loading, activeCategory, storeService } = this.props;
-
+        debugger
         if (loading) {
-            return <Loader />
+            return (
+                <div className='categoryContainer' >
+                    <ul className="list-category">
+                        <Loader />
+                    </ul>
+                    <div
+                        // onClick={this.scroll} 
+                        className='more-btn'>More-></div>
+                </div>
+            )
         }
-       
+
         return (
             <div className='categoryContainer' >
                 <ul className="list-category">
-                    {   
+                    {
                         categories.map((cat, id) => {
                             return (
                                 <li key={id} className={(activeCategory === cat) ? `category ${cat} active` : `category ${cat}`}>
-                                    <JokeItem 
-                                    category={cat}
-                                     categories={categories} 
-                                     storeService={storeService}
-                                     ></JokeItem>
+                                    <JokeItem
+                                        category={cat}
+                                        categories={categories}
+                                        storeService={storeService}
+                                    ></JokeItem>
                                 </li>
                             )
                         })
                     }
                 </ul>
                 <div
-                // onClick={this.scroll} 
-                className='more-btn'>More-></div>
+                    // onClick={this.scroll} 
+                    className='more-btn'>More-></div>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({ categories, loading, activeCategory }:IState) => {
+const mapStateToProps = ({ categories, loading, activeCategory }: IState) => {
     return {
         categories,
         loading,
@@ -72,7 +81,7 @@ const mapStateToProps = ({ categories, loading, activeCategory }:IState) => {
     }
 }
 
-const mapDispatchToProps = (dispatch:React.Dispatch<any>) => {
+const mapDispatchToProps = (dispatch: React.Dispatch<any>) => {
     return {
         jokeCategories: (categories: string[]) => dispatch(actions.jokeCategories(categories))
     }

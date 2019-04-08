@@ -23,8 +23,8 @@ export interface IJokeHolderProps {
 
 type Props = IState & IJokeHolderProps;
 
- class JokeHolder extends React.Component<Props, IState> {
-    
+class JokeHolder extends React.Component<Props, IState> {
+
     componentDidMount() {
         // eslint-disable-next-line
         const { storeService, randomJoke, jokeRequest } = this.props;
@@ -35,9 +35,8 @@ type Props = IState & IJokeHolderProps;
     }
 
     renderJoke() {
-        debugger
         const { categoryJoke, currentJoke } = this.props;
-       return (categoryJoke.value !== '') ? categoryJoke.value : currentJoke;
+        return (categoryJoke.value !== '') ? categoryJoke.value : currentJoke;
         // return currentJoke
     }
 
@@ -61,10 +60,13 @@ type Props = IState & IJokeHolderProps;
         const { loading } = this.props;
         if (loading) {
             return (
-                <div className='jokeContainer'>
-                    <p className="current-joke">
-                        <Loader />
-                    </p>
+                <div>
+                    <div className='jokeContainer'>
+                        <p className="current-joke">
+                            <Loader />
+                        </p>
+                    </div>
+                    <JokeCategories />
                 </div>
             )
         }
@@ -80,7 +82,7 @@ type Props = IState & IJokeHolderProps;
                 <div
                     className="btn btn-warning random"
                     onClick={() => { this.randomBtnClick() }}
-                ></div>
+                >Random</div>
             </div>
         )
     }
@@ -97,8 +99,8 @@ const mapStateToProps = ({ currentJoke, loading, categoryJoke, activeCategory }:
 
 const mapDispatchToProps = (dispatch: React.Dispatch<any>) => {
     return {
-        jokeRequest: ()=>dispatch(actions.jokeRequest()),
-        randomJoke: (joke:string)=>dispatch(actions.randomJoke(joke))
+        jokeRequest: () => dispatch(actions.jokeRequest()),
+        randomJoke: (joke: string) => dispatch(actions.randomJoke(joke))
     }
 }
 

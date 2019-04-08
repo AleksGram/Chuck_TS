@@ -25,6 +25,7 @@ const reducer = (state=initialState, action:any) => {
             loading: false
         }
         case constants.RND_CAT_JOKE:
+        debugger
         return {
             ...state,
             categoryJoke: action.payload,
@@ -32,6 +33,11 @@ const reducer = (state=initialState, action:any) => {
             activeCategory: action.activeCategory
         }
         case constants.REQUEST_JOKE:
+        return {
+            ...state,
+            loading: true
+        }
+        case constants.CATEGORY_CHANGE:
         return {
             ...state,
             loading: true
