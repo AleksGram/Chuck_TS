@@ -1,0 +1,41 @@
+.categoryContainer {
+    position: relative;
+    top: -5em; 
+    border: .05em solid;
+    width: 11%;
+    max-width: 12.5em;
+    height: 22em;
+    margin: 1% 0 0 35%;
+    border-radius: 1.5em;
+    color: #e98227;
+    border-color: black;
+    padding: 2px;
+}
+
+ul.list-category {
+    list-style-type: none;
+    overflow: scroll;
+    height: 85%;
+    padding-left: 0;
+    text-align: center;
+    position: relative;
+}
+
+ul.list-category::-webkit-scrollbar {
+    width: 5px;
+  }
+  /* iOS style*/
+  ul.list-category::-webkit-scrollbar-thumb{
+    background-color: inherit;
+    border-radius: 4px;
+  }
+
+
+li.category {
+    font-size: 2em;
+}
+
+li.category.active {
+    color: black;
+    text-decoration: underline;
+}

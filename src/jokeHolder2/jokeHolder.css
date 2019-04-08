@@ -1,0 +1,47 @@
+
+.jokeContainer {
+    min-height: 145px;
+}
+
+p.current-joke {
+    position: relative;
+    top: 6em;
+    left: 49%;
+    font-size: 1.5em;
+    width: 19%;
+    max-height: 6em;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+p.current-joke::-webkit-scrollbar {
+    width: 8px;
+}
+/* iOS style*/
+p.current-joke::-webkit-scrollbar-thumb{
+background-color: #eedcc9;
+border-radius: 4px;
+}
+
+.more-btn {
+    text-align: center;
+}
+
+.more-btn:hover {
+    cursor: pointer;
+}
+
+.random {
+    border-radius: .2em;
+    position: relative;
+    left: 54%;
+    bottom: 8em;
+    background-color: inherit;
+    border-color: #f15a24;
+    color: #f15a24;
+}
+
+.random:active {
+    background: #f15a24
+} 
