@@ -9,6 +9,7 @@ import './jokeCategories.css';
 import JokeItem from '../jokeItem';
 import ChuckService from '../../services/store-service';
 import { IState } from '../../store/index';
+// import JokeCategories from './index';
 
 
 
@@ -33,7 +34,7 @@ class JokeCategories extends React.Component<Props, IState> {
 
     render() {
         // eslint-disable-next-line
-        const { categories, loading, activeCategory, storeService } = this.props;
+        const { categories, loading, activeCategory, storeService, jokeLoading } = this.props;
         debugger
         if (loading) {
             return (
@@ -59,6 +60,7 @@ class JokeCategories extends React.Component<Props, IState> {
                                         category={cat}
                                         categories={categories}
                                         storeService={storeService}
+                                        jokeLoading
                                     ></JokeItem>
                                 </li>
                             )

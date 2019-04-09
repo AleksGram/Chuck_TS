@@ -3,6 +3,7 @@ import reducer from '../reducers';
 
 export interface IState {
         loading: boolean,
+        jokeLoading: boolean,
         currentJoke: string,
         categories: string[],
         categoryJoke: {value:string},

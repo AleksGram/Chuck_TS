@@ -18,6 +18,7 @@ export interface IJokeHolderProps {
     randomJoke: (joke: string) => { type: string, payload: string },
     jokeRequest: () => { type: string }
     rndCategoryJoke: (joke: string, category: string) => { type: string, payload: string, activeCategory: string }
+    categoryChanged: () => { type: string }
 
 }
 
@@ -41,14 +42,15 @@ class JokeHolder extends React.Component<Props, IState> {
     }
 
     randomBtnClick() {
-        const { activeCategory, storeService, rndCategoryJoke, randomJoke, jokeRequest } = this.props;
+        const { activeCategory, storeService, rndCategoryJoke, randomJoke, jokeRequest, categoryChanged } = this.props;
         if (activeCategory) {
-            jokeRequest();
+            // jokeRequest();
+            categoryChanged();
             // eslint-disable-next-line
             const jokeData = storeService.getCategoryRndJoke(activeCategory)
                 .then((data) => rndCategoryJoke(data, activeCategory));
         } else {
-            jokeRequest();
+            categoryChanged();
             // eslint-disable-next-line
             const currentjoke = storeService.getRandomJoke()
                 .then((data) => randomJoke(data.value))
@@ -57,8 +59,9 @@ class JokeHolder extends React.Component<Props, IState> {
 
     render() {
         // eslint-disable-next-line
-        const { loading } = this.props;
-        if (loading) {
+        const { loading, jokeLoading } = this.props;
+        debugger
+        if (jokeLoading) {
             return (
                 <div>
                     <div className='jokeContainer'>
@@ -67,6 +70,10 @@ class JokeHolder extends React.Component<Props, IState> {
                         </p>
                     </div>
                     <JokeCategories />
+                    <div
+                        className="btn btn-warning random"
+                        onClick={() => { this.randomBtnClick() }}
+                    >Random</div>
                 </div>
             )
         }
@@ -88,19 +95,22 @@ class JokeHolder extends React.Component<Props, IState> {
     }
 }
 
-const mapStateToProps = ({ currentJoke, loading, categoryJoke, activeCategory }: IState) => {
+const mapStateToProps = ({ currentJoke, loading, categoryJoke, activeCategory, jokeLoading }: IState) => {
     return {
         currentJoke,
         loading,
         categoryJoke,
-        activeCategory
+        activeCategory,
+        jokeLoading
     }
 }
 
 const mapDispatchToProps = (dispatch: React.Dispatch<any>) => {
     return {
         jokeRequest: () => dispatch(actions.jokeRequest()),
-        randomJoke: (joke: string) => dispatch(actions.randomJoke(joke))
+        randomJoke: (joke: string) => dispatch(actions.randomJoke(joke)),
+        rndCategoryJoke: (joke: string, category: string) => dispatch(actions.rndCategoryJoke(joke, category)),
+        categoryChanged: () => dispatch(actions.categoryChanged())
     }
 }
 

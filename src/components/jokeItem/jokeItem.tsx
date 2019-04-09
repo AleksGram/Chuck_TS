@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import './jokeItem.css';
 
 import { compose } from 'redux';
@@ -24,14 +24,10 @@ export interface IRndJokeAct {
     activeCategory: string
 }
 
-type Props = IState & IJokeItemProps;
+type Props = IJokeItemProps & IState;
 type State = IState;
 
 class JokeItem extends React.Component<Props, IState> {
-    constructor(props:Props){
-        super(props)
-        this.categoryClick = this.categoryClick.bind(this);
-    }
      categoryClick:(e:React.MouseEvent)=>void = (e: React.MouseEvent) => {
         const {category, storeService, rndCategoryJoke, categoryChanged}=this.props;
         // eslint-disable-next-line
@@ -52,21 +48,6 @@ class JokeItem extends React.Component<Props, IState> {
     }
 }
 
-// const JokeItem: React.FC<Props> = (props) => {
-//     const { category, storeService, rndCategoryJoke } = props;
-// debugger
-//     const categoryClick = (e: React.MouseEvent) => {
-//         // eslint-disable-next-line
-//         const res = storeService.getCategoryRndJoke(category)
-//             .then((data) => rndCategoryJoke(data, category))
-//     }
-//     return (
-//         <span
-//             onClick={categoryClick}
-//         >
-//             {category}</span>
-//     )
-// }
 
 const mapStateToProps = ({ currentJoke, loading, categoryJoke, activeCategory }: IState) => {
     return {

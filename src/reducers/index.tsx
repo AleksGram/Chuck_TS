@@ -5,6 +5,7 @@ import * as constants from '../constants';
 
 const initialState:IState = {
     loading: true,
+    jokeLoading: true,
     currentJoke: '',
     categories: [],
     categoryJoke: {value: ''},
@@ -16,7 +17,8 @@ const reducer = (state=initialState, action:any) => {
         return {
             ...state,
             currentJoke: action.payload,
-            loading: false
+            loading: false,
+            jokeLoading: false
         }
         case constants.JOKE_CATEGORY:
         return {
@@ -30,17 +32,19 @@ const reducer = (state=initialState, action:any) => {
             ...state,
             categoryJoke: action.payload,
             loading: false,
+            jokeLoading: false,
             activeCategory: action.activeCategory
         }
         case constants.REQUEST_JOKE:
         return {
             ...state,
+            jokeLoading: true,
             loading: true
         }
         case constants.CATEGORY_CHANGE:
         return {
             ...state,
-            loading: true
+            jokeLoading: true
         }
         default:
             return state;
