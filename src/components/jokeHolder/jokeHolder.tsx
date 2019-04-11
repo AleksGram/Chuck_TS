@@ -60,7 +60,6 @@ class JokeHolder extends React.Component<Props, IState> {
     render() {
         // eslint-disable-next-line
         const { loading, jokeLoading } = this.props;
-        debugger
         if (jokeLoading) {
             return (
                 <div>

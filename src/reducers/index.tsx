@@ -27,7 +27,6 @@ const reducer = (state=initialState, action:any) => {
             loading: false
         }
         case constants.RND_CAT_JOKE:
-        debugger
         return {
             ...state,
             categoryJoke: action.payload,

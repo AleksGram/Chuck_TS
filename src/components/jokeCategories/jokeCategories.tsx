@@ -35,7 +35,6 @@ class JokeCategories extends React.Component<Props, IState> {
     render() {
         // eslint-disable-next-line
         const { categories, loading, activeCategory, storeService, jokeLoading } = this.props;
-        debugger
         if (loading) {
             return (
                 <div className='categoryContainer' >
